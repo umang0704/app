@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(path = "/app")
+@RequestMapping(path = "/eea")
 public class ApplicationController {
-	@GetMapping(path = "/index")
+	@GetMapping(path = "/")
 	public ModelAndView sendList(ModelAndView modelAndView) {
 		List<String> lang = Arrays.asList("Java", "Python");
 		modelAndView.addObject("lang", lang);
