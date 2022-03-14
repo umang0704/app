@@ -13,7 +13,7 @@
 <body>
     <div class="container mt-6">
         <h1>Select Account Type</h1>
-        <form action="" method="post">
+        <form action="/eea/initiateAccount" method="post">
             <label for="">Account Type</label>
             <hr>
             

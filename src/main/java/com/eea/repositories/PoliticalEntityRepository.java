@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PoliticalEntityRepository extends JpaRepository<Integer, PoliticalEntityModel> {
+public interface PoliticalEntityRepository extends JpaRepository<PoliticalEntityModel, Integer> {
 }

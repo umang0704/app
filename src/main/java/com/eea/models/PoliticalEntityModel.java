@@ -1,8 +1,4 @@
 package com.eea.models;
-
-import jdk.jfr.events.CertificateId;
-import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

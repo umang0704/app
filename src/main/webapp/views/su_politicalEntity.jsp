@@ -13,7 +13,7 @@
 <body>
 
 	<div class="container mt-2">
-		<form action="" method="post">
+		<form action="/eea/signUp" method="post">
             <input type="text" placeholder="Enter Organization Name"><br>
         </form>
 	</div>

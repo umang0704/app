@@ -28,6 +28,14 @@ public class AuthenticationController {
 		modelAndView.setViewName("su_accountType");
 		return modelAndView;
 	}
+	
+	@PostMapping(path = "/initiateAccount")
+	public ModelAndView initiateAccount(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("su_politicalEntity");
+		return modelAndView;
+	}
+	
 
 
 	
