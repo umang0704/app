@@ -18,4 +18,10 @@ public class ApplicationController {
 		modelAndView.setViewName("index");
 		return modelAndView;
 	}
+	
+	@GetMapping(path = "/signUp")
+	public ModelAndView signUpPage() {
+		ModelAndView modelAndView = new ModelAndView("signUp");
+		return modelAndView;
+	}
 }
