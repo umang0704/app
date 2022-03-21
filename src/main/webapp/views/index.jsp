@@ -1,6 +1,9 @@
-<%@page import="java.util.List"%>
+<%@page import="com.eea.dto.response.BaseResponse"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
+<%
+BaseResponse baseResponse = (BaseResponse) request.getAttribute("baseResponse");
+%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,7 +11,6 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -18,10 +20,24 @@
 <title>EEA</title>
 </head>
 <body style="border: 0, margin: 0">
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="header.jsp" />
 	<div class="container-fluid m-4">
+		<%
+		if (baseResponse.getMessage() != null && !baseResponse.getMessage().isEmpty()) {
+		%>
+		<div
+			class="alert alert-<%=baseResponse.getMessageType()%> alert-dismissible fade show"
+			role="alert"><%=baseResponse.getMessage()%>
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<%
+		}
+		%>
 		<div class="row d-flex justify-content-around">
-			<div class="col-8 d-flex justify-content-center align-items-center">
+			<div class="col-7 d-flex justify-content-center align-items-center">
 				<div id="carouselExampleIndicators" class="carousel slide"
 					data-ride="carousel">
 					<ol class="carousel-indicators">
@@ -63,8 +79,9 @@
 					</a>
 				</div>
 			</div>
-			<div class="col-4 d-flex justify-content-center align-items-center">
-				<form class="p-2 m-4">
+			<div class="col-5 d-flex justify-content-center align-items-center">
+				<form class="p-2 m-4" method="post" action="/eea/login"
+					enctype="application/json">
 					<h1>Sign In</h1>
 					<div class="form-group">
 						<label for="exampleDropdownFormEmail2">Email address</label> <input
@@ -82,7 +99,7 @@
 		</div>
 	</div>
 
-	<jsp:include page="footer.jsp"/>
+	<jsp:include page="footer.jsp" />
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
