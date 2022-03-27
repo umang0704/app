@@ -1,0 +1,36 @@
+.profile-image {
+  border-radius: 50%;
+  width: 50px;
+}
+.createPost{
+  width: 100%;
+}
+.postContent {
+  resize: none;
+  width:80%;
+}
+.uploadImage{
+    display:none; 
+}
+.allPosts{
+  border-width: 1px;
+  width:80%;
+  height:650px;
+  overflow-y: auto;
+}
+.singlePost{
+  border: solid;
+  border-width: 1px;
+  border-radius: 10px;
+}
+.postImage{
+  width: 500px;
+}
+.commentText{
+  width:100%;
+  height: 50px;
+}
+.postCommentBtn{
+  border: none;
+  background-color: white;
+}

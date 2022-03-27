@@ -7,5 +7,5 @@ import com.eea.models.Account;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Integer>{
-	
+	Account findByAccountEmailAndAccountPassword(String accountEmail,String accountPassword);
 }

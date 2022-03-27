@@ -1,0 +1,6 @@
+.profilePicture{
+    display: none; 
+}
+.formHeading :hover{ 
+  box-shadow: 10px 10px 5px #e9e9e9;
+}

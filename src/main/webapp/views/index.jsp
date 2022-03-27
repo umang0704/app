@@ -21,7 +21,7 @@ BaseResponse baseResponse = (BaseResponse) request.getAttribute("baseResponse");
 </head>
 <body style="border: 0, margin: 0">
 	<jsp:include page="header.jsp" />
-	<div class="container-fluid m-4">
+	<div class="mainBody container-fluid m-4">
 		<%
 		if (baseResponse.getMessage() != null && !baseResponse.getMessage().isEmpty()) {
 		%>
@@ -85,13 +85,13 @@ BaseResponse baseResponse = (BaseResponse) request.getAttribute("baseResponse");
 					<h1>Sign In</h1>
 					<div class="form-group">
 						<label for="exampleDropdownFormEmail2">Email address</label> <input
-							type="email" class="form-control" id="exampleDropdownFormEmail2"
+							type="email" name="loginEmail" class="form-control" id="exampleDropdownFormEmail2"
 							placeholder="Enter Email">
 					</div>
 					<div class="form-group">
 						<label for="exampleDropdownFormPassword2">Password</label> <input
 							type="password" class="form-control"
-							id="exampleDropdownFormPassword2" placeholder="Enter Password">
+							id="exampleDropdownFormPassword2" name="loginPassword" placeholder="Enter Password">
 					</div>
 					<button type="submit" class="btn btn-primary">Sign in</button>
 				</form>

@@ -2,14 +2,23 @@ package com.eea.dto;
 
 import com.eea.enums.AccountType;
 
+import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
- 
+
+import javax.validation.constraints.NotEmpty;
+
+
 public class SignUpFormDto {
-	private AccountType accountType; 
+	@NotNull @NotEmpty
+	private AccountType accountType;
+	@NotNull @NotEmpty
 	private String accountName;
+	@NotNull @NotEmpty
 	private String accountEmail;
+	@NotNull @NotEmpty
 	private String accountPassword;
+	@NotNull @NotEmpty
 	private String accountConfirmPassword;
 	public AccountType getAccountType() {
 		return accountType;

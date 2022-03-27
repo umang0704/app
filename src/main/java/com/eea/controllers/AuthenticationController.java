@@ -21,18 +21,12 @@ public class AuthenticationController {
 		System.out.println(loginForm.toString());
 		return modelAndView;
 	}
-	
-//	@GetMapping(path = "/signUp")
-//	public ModelAndView signUp(HttpServletRequest request) {
-//		ModelAndView modelAndView = new ModelAndView();
-//		modelAndView.setViewName("su_accountType");
-//		return modelAndView;
-//	}
+
 	
 	@PostMapping(path = "/initiateAccount")
 	public ModelAndView initiateAccount(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("su_politicalEntity");
+		modelAndView.setViewName("signUp");
 		return modelAndView;
 	}
 	

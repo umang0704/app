@@ -10,9 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.eea.enums.AccountType;
- 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
-@Table(name="account") 
+@Table(name="account")
+@Getter
+@Setter
 public class Account {
 
 	@Id
@@ -33,55 +37,43 @@ public class Account {
 	@Enumerated(EnumType.STRING)
 	private AccountType accountType;
 
-
 	public Integer getAccountId() {
 		return accountId;
 	}
-
 
 	public void setAccountId(Integer accountId) {
 		this.accountId = accountId;
 	}
 
-
 	public String getAccountEmail() {
 		return accountEmail;
 	}
-
 
 	public void setAccountEmail(String accountEmail) {
 		this.accountEmail = accountEmail;
 	}
 
-
 	public String getAccountPassword() {
 		return accountPassword;
 	}
-
 
 	public void setAccountPassword(String accountPassword) {
 		this.accountPassword = accountPassword;
 	}
 
-
 	public String getAccountName() {
 		return accountName;
 	}
-
 
 	public void setAccountName(String accountName) {
 		this.accountName = accountName;
 	}
 
-
 	public AccountType getAccountType() {
 		return accountType;
 	}
 
-
 	public void setAccountType(AccountType accountType) {
 		this.accountType = accountType;
 	}
-	
-	
 }
