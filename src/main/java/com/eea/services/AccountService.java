@@ -75,4 +75,12 @@ public class AccountService {
     public AccountDetails saveAccountDetails(AccountDetails accountDetails){
         return accountDetailsHelper.save(accountDetails);
     }
+
+    public Account getAccountByAccountEmail(String email){
+        return accountHelper.getAccountUsingAccountEmail(email);
+    }
+
+    public Account saveAccount(Account account){
+        return accountRepository.save(account);
+    }
 }

@@ -35,8 +35,8 @@ public class AccountHelper {
 		return account;
 	}
 
-	public AccountDetails getAccountDetailsUsingAccountEmail(String accountEmail){
-		return null;
+	public Account getAccountUsingAccountEmail(String accountEmail){
+		return accountRepository.findByAccountEmail(accountEmail);
 	}
 	
 }

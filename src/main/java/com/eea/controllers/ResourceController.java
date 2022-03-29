@@ -2,6 +2,7 @@ package com.eea.controllers;
 
 import com.eea.models.AccountDetails;
 import com.eea.services.AccountService;
+import com.eea.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
@@ -22,6 +23,9 @@ public class ResourceController {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private PostService postService;
+
     @GetMapping(path = "/accountImage/{accountId}")
     public ResponseEntity<ByteArrayResource> getProfilePicture(@PathVariable("accountId") Integer accountId) throws IOException {
         AccountDetails accountDetails = accountService.getAccountDetailsByAccountId(accountId);
@@ -31,6 +35,12 @@ public class ResourceController {
             accountImage = new byte[(int)image.length()];
             new FileInputStream(image).read(accountImage);
         }
+        return ResponseEntity.ok()
+                .body(new ByteArrayResource(accountImage));
+    }
+    @GetMapping(path = "/postImage/{postId}")
+    public ResponseEntity<ByteArrayResource> getPostPicture(@PathVariable("postId") Integer postId) throws IOException {
+        byte[] accountImage = postService.postImage(postId);
         return ResponseEntity.ok()
                 .body(new ByteArrayResource(accountImage));
     }

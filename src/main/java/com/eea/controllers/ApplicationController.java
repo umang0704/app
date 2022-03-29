@@ -5,8 +5,11 @@ import javax.servlet.http.HttpSession;
 
 import com.eea.dto.LogInFormDTO;
 import com.eea.dto.ProfileDataDto;
+import com.eea.dto.UpdatePasswordDto;
 import com.eea.models.Account;
 import com.eea.models.AccountDetails;
+import com.eea.models.Post;
+import com.eea.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +23,7 @@ import com.eea.services.AccountService;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -29,6 +33,9 @@ public class ApplicationController {
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private PostService postService;
 
     @GetMapping(path = "/index")
     public ModelAndView sendList(Model model) {
@@ -51,7 +58,14 @@ public class ApplicationController {
     @PostMapping(path = "/createAccount")
     public ModelAndView createAccount(@ModelAttribute SignUpFormDto signUpFormDto, Model model) {
         ModelAndView modelAndView = new ModelAndView("signUp");
-        BaseResponse baseResponse = accountService.createAccount(signUpFormDto);
+        BaseResponse baseResponse;
+        if(signUpFormDto.getAccountPassword().equals(signUpFormDto.getAccountConfirmPassword())) {
+            baseResponse = accountService.createAccount(signUpFormDto);
+        }else{
+            baseResponse = new BaseResponse();
+            baseResponse.setMessage("Please Check Re-Entered Password.");
+            baseResponse.setMessageType("danger");
+        }
         modelAndView.addObject("baseResponse", baseResponse);
         return modelAndView;
     }
@@ -139,6 +153,77 @@ public class ApplicationController {
         baseResponse.setData(data);
         modelAndView.addObject("baseResponse",baseResponse);
         modelAndView.setViewName("home");
+        return modelAndView;
+    }
+
+    @GetMapping(path = "/logout")
+    public ModelAndView logout(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView("index");
+        request.getSession().invalidate();
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setMessage("Logged out successfully.!");
+        baseResponse.setMessageType("success");
+        modelAndView.addObject("baseResponse",baseResponse);
+        return modelAndView;
+    }
+
+    @GetMapping(path = "/posts")
+    public ModelAndView myPosts(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView("myPosts");
+        HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(300);
+        Integer accountId = (Integer) session.getAttribute("accountId");
+        AccountDetails accountDetails = accountService.getAccountDetailsByAccountId(accountId);
+        List<Post> posts = postService.getPostByAccountId(accountId);
+        accountDetails.setAccountPost(posts);
+        session.setAttribute("accountDetails",accountDetails);
+        return modelAndView;
+    }
+
+    @PostMapping(path = "/deletePost/{accountId}/{postId}")
+    public ModelAndView deletePost(HttpServletRequest request,@PathVariable(name = "postId") Integer postId,@PathVariable(name = "accountId")Integer accountId){
+        ModelAndView modelAndView = new ModelAndView("myPosts");
+        HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(300);
+        postService.deletePost(postId,accountId);
+        AccountDetails accountDetails = accountService.getAccountDetailsByAccountId(accountId);
+        List<Post> posts = postService.getPostByAccountId(accountId);
+        accountDetails.setAccountPost(posts);
+        session.setAttribute("accountDetails",accountDetails);
+        return modelAndView;
+    }
+
+    @PostMapping(path = "/accountSetting")
+    public ModelAndView openAccountSetting(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+        HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(300);
+        Integer accountId = (Integer) session.getAttribute("accountId");
+        AccountDetails accountDetails = accountService.getAccountDetailsByAccountId(accountId);
+        session.setAttribute("accountDetails",accountDetails);
+        modelAndView.setViewName("accountSetting");
+        return modelAndView;
+    }
+
+    @PostMapping(path = "/updateAccountPassword")
+    public ModelAndView updateAccountPassword(HttpServletRequest request,@ModelAttribute UpdatePasswordDto updatePasswordDto){
+        ModelAndView modelAndView = new ModelAndView();
+        BaseResponse baseResponse = new BaseResponse();
+        HttpSession session = request.getSession();
+        Integer accountId = (Integer) session.getAttribute("accountId");
+        if(updatePasswordDto.getNewAccountPassword().equals(updatePasswordDto.getConfirmNewAccountPassword())) {
+            Account account = accountService.getAccountDetailsByAccountId(accountId).getAccount();
+            account.setAccountPassword(updatePasswordDto.getNewAccountPassword());
+            accountService.saveAccount(account);
+            baseResponse.setMessage("Password Updated Successfully.");
+            baseResponse.setMessageType("success");
+            session.setAttribute("baseResponse",baseResponse);
+        }else{
+            baseResponse.setMessage("Please Check Re-Entered Password.");
+            baseResponse.setMessageType("danger");
+            session.setAttribute("baseResponse",baseResponse);
+        }
+        modelAndView.setViewName("accountSetting");
         return modelAndView;
     }
 }

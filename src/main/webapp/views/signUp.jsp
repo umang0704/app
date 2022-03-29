@@ -62,7 +62,7 @@ BaseResponse baseResponse = (BaseResponse) request.getAttribute("baseResponse");
 					</div>
 					<div class="form-group">
 						<label class="form-label">Email</label> <input
-							class="form-control" type="text" name="accountEmail"
+							class="form-control" type="email" name="accountEmail"
 							placeholder="Enter Email." />
 					</div>
 					<div class="form-group">

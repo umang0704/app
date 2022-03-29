@@ -3,15 +3,8 @@ package com.eea.models;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="account_details")
@@ -37,12 +30,24 @@ public class AccountDetails {
 	@JoinColumn(name="account_id",referencedColumnName ="accountId")
 	private Account account;
 
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "account_details_id",referencedColumnName = "accountDetailsId")
+	private List<Post> accountPost;
+
 	public String getAbout() {
 		return about;
 	}
 
 	public void setAbout(String about) {
 		this.about = about;
+	}
+
+	public List<Post> getAccountPost() {
+		return accountPost;
+	}
+
+	public void setAccountPost(List<Post> accountPost) {
+		this.accountPost = accountPost;
 	}
 
 	public Integer getAccountDetailsId() {

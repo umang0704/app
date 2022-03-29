@@ -36,6 +36,21 @@ BaseResponse baseResponse = (BaseResponse) request.getAttribute("baseResponse");
 		<%
 		}
 		%>
+		<%
+		BaseResponse baseResponse2 = (BaseResponse) session.getAttribute("baseResponse");  
+		if (baseResponse2!=null && baseResponse2.getMessage() != null && !baseResponse2.getMessage().isEmpty()) {
+		%>
+		<div
+			class="alert alert-<%=baseResponse2.getMessageType()%> alert-dismissible fade show"
+			role="alert"><%=baseResponse2.getMessage()%>
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<%
+		}
+		%>
 		<div class="row d-flex justify-content-around">
 			<div class="col-7 d-flex justify-content-center align-items-center">
 				<div id="carouselExampleIndicators" class="carousel slide"
