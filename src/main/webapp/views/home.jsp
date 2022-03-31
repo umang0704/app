@@ -20,6 +20,8 @@ if (baseResponse != null) {
 		if (followers == null)
 	followers = 0;
 		Integer profileViews;
+		String about = "";
+		if(accountDetails.getAbout()!=null) about = accountDetails.getAbout();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,22 +39,19 @@ if (baseResponse != null) {
 <title>EEA | <%=name%></title>
 </head>
 <body>
-	<div class="container-fluid p-0">
-		<nav class="navbar navbar-expand-lg navbar-light bg-primary">
-			<div class="container-fluid">
-
-				<div>
-					<a class="navbar-brand" href="/eea/index">E-Election Assist</a> <a
-						class="navbar-brand" href="/eea/home/<%=account.getAccountId()%>">Home</a>
-				</div>
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<form class="d-flex" action="/eea/logout">
-						<button class="btn btn-danger" type="submit">Log Out</button>
-					</form>
-				</div>
-			</div>
-		</nav>
-	</div>
+	<div class="container-fluid p-0"> 
+        <nav class= "navbar navbar-expand-lg navbar-light bg-primary">
+          <div class="container-fluid d-flex justify-content-between">
+          	<div >
+                <a class="navbar-brand" href="/eea/index">E-Election Assist</a>
+                <a class="navbar-brand" href="/eea/home/<%=account.getAccountId()%>">Home</a>
+          	</div>
+            <form class="d-flex" action="/eea/logout">
+                <button class="btn btn-danger" type="submit">Log Out</button>
+            </form> 
+          </div>
+        </nav>
+      </div>
 	<!-- Body -->
 	<div class="container-fluid p-0">
 		<div class="row">
@@ -79,7 +78,7 @@ if (baseResponse != null) {
 								<h5>About</h5>
 							</div>
 							<div class="col-12 d-flex justify-content-end">
-								<p style="overflow-wrap: break-word; word-wrap: break-word; hyphens: auto;"><%=accountDetails.getAbout()%></p>
+								<p style="overflow-wrap: break-word; word-wrap: break-word; hyphens: auto;"><%=about%></p>
 							</div>
 						</div>
 						<hr>
@@ -156,7 +155,7 @@ if (baseResponse != null) {
 									<div class="row">
 										<div class="col-1">
 											<div>
-												<img src="https://source.unsplash.com/70x70/?profilepicture"
+												<img src="/eea/accountImage/<%= post.getAccountDetails().getAccount().getAccountId() %>"
 													class="profile-image card-img-top rounded-circle" alt="...">
 											</div>
 										</div>

@@ -41,7 +41,7 @@ public class ApplicationController {
     public ModelAndView sendList(Model model) {
         ModelAndView modelAndView = new ModelAndView();
         BaseResponse baseResponse = new BaseResponse();
-        modelAndView.addObject("baseResponse", baseResponse);
+        modelAndView.addObject("baseRespoRnse", baseResponse);
         modelAndView.setViewName("index");
         return modelAndView;
     }

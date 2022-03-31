@@ -15,6 +15,8 @@ if (accountId != null) {
 		Map<String, Object> data = (Map<String, Object>) baseResponse.getData();
 		AccountDetails accountDetails = (AccountDetails) data.get("accountDetails");
 		Account account = accountDetails.getAccount();
+		String about = "";
+		if(accountDetails.getAbout()!=null) about = accountDetails.getAbout();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,26 +35,19 @@ if (accountId != null) {
 <title>EEA | <%=account.getAccountName()%></title>
 </head>
 <body>
-	<div class="container-fluid p-0">
-		<nav class="navbar navbar-expand-lg navbar-light bg-primary">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="/eea/index">E-Election Assist</a> <a
-					class="navbar-brand"
-					href="/eea/home/<%=session.getAttribute("accountId")%>">Home</a>
-				<button class="navbar-toggler" type="button"
-					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-					aria-controls="navbarSupportedContent" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<form class="d-flex" action="/logout">
-						<button class="btn btn-danger" type="submit">Log Out</button>
-					</form>
-				</div>
-			</div>
-		</nav>
-	</div>
+	<div class="container-fluid p-0"> 
+        <nav class= "navbar navbar-expand-lg navbar-light bg-primary">
+          <div class="container-fluid d-flex justify-content-between">
+          	<div >
+                <a class="navbar-brand" href="/eea/index">E-Election Assist</a>
+                <a class="navbar-brand" href="/eea/home/<%=account.getAccountId()%>">Home</a>
+          	</div>
+            <form class="d-flex" action="/eea/logout">
+                <button class="btn btn-danger" type="submit">Log Out</button>
+            </form> 
+          </div>
+        </nav>
+      </div>
 	<!--  Message -->
 	<%
 	if (baseResponse.getMessage() != null && !baseResponse.getMessage().isEmpty()) {
@@ -111,7 +106,7 @@ if (accountId != null) {
 						</div>
 						<div class="form-group p-1">
 							<label for="name">About</label> <input name="about" type="text"
-								class="form-control" value="<%=accountDetails.getAbout()%>" />
+								class="form-control" value="<%=about%>" />
 						</div>
 						<div class="d-flex justify-content-center">
 							<button class="btn btn-outline-success" type="submit">Update</button>

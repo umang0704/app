@@ -23,7 +23,7 @@ BaseResponse baseResponse = (BaseResponse) request.getAttribute("baseResponse");
 	<jsp:include page="header.jsp" />
 	<div class="mainBody container-fluid m-4">
 		<%
-		if (baseResponse.getMessage() != null && !baseResponse.getMessage().isEmpty()) {
+		if (baseResponse!=null && baseResponse.getMessage() != null && !baseResponse.getMessage().isEmpty()) {
 		%>
 		<div
 			class="alert alert-<%=baseResponse.getMessageType()%> alert-dismissible fade show"
@@ -49,6 +49,7 @@ BaseResponse baseResponse = (BaseResponse) request.getAttribute("baseResponse");
 			</button>
 		</div>
 		<%
+		session.setAttribute("baseResponse", null);
 		}
 		%>
 		<div class="row d-flex justify-content-around">
