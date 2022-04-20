@@ -102,12 +102,12 @@ BaseResponse baseResponse = (BaseResponse) request.getAttribute("baseResponse");
 					<div class="form-group">
 						<label for="exampleDropdownFormEmail2">Email address</label> <input
 							type="email" name="loginEmail" class="form-control" id="exampleDropdownFormEmail2"
-							placeholder="Enter Email">
+							placeholder="Enter Email" required>
 					</div>
 					<div class="form-group">
 						<label for="exampleDropdownFormPassword2">Password</label> <input
 							type="password" class="form-control"
-							id="exampleDropdownFormPassword2" name="loginPassword" placeholder="Enter Password">
+							id="exampleDropdownFormPassword2" required name="loginPassword" placeholder="Enter Password">
 					</div>
 					<button type="submit" class="btn btn-primary">Sign in</button>
 				</form>

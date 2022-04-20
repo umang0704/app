@@ -30,9 +30,35 @@ public class AccountDetails {
 	@JoinColumn(name="account_id",referencedColumnName ="accountId")
 	private Account account;
 
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "account_details_id",referencedColumnName = "accountDetailsId")
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "account_details_id_post",referencedColumnName = "accountDetailsId")
 	private List<Post> accountPost;
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "account_details_id_founders",referencedColumnName = "accountDetailsId")
+	List<Founders> founders;
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "account_details_id_leaders",referencedColumnName = "accountDetailsId")
+	List<Leaders> leaders;
+	
+	
+	
+	public List<Founders> getFounders() {
+		return founders;
+	}
+
+	public void setFounders(List<Founders> founders) {
+		this.founders = founders;
+	}
+
+	public List<Leaders> getLeaders() {
+		return leaders;
+	}
+
+	public void setLeaders(List<Leaders> leaders) {
+		this.leaders = leaders;
+	}
 
 	public String getAbout() {
 		return about;

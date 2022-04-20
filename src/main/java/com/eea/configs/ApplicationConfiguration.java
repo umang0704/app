@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.eea.services.helper.AccountHelper;
 import com.eea.services.helper.AuthenticationHelper;
+import com.eea.services.helper.ExcelHelper;
 
 @Configuration
 public class ApplicationConfiguration {
@@ -28,5 +29,10 @@ public class ApplicationConfiguration {
     @Bean
     public PostHelper postHelper() {
         return new PostHelper();
+    }
+    
+    @Bean
+    public ExcelHelper excelHelper() {
+    	return new ExcelHelper();
     }
 }
